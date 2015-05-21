@@ -18,8 +18,8 @@ class AliyunOcsServiceProvider extends ServiceProvider {
             $memcached->setOption(Memcached::OPT_COMPRESSION, false);
             $memcached->setOption(Memcached::OPT_BINARY_PROTOCOL, true);
 
-            if(isset($config['servers']['authname']) && ini_get('memcached.use_sasl')) {
-                $memcached->setSaslAuthData($config['servers']['authname'], $config['servers']['authpass']);
+            if(isset($config['authname']) && ini_get('memcached.use_sasl')) {
+                $memcached->setSaslAuthData($config['authname'], $config['authpass']);
             }
 
             $prefix = $app['config']['cache.prefix'];
