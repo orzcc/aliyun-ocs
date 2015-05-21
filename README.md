@@ -33,16 +33,13 @@ add a stores config to the file, change your ocs config
         [
             'host' => 'Your ocs host',
             'port' => 11211,	// ocs port
-            'pconn' => false,
-            'weight' => 1,
-            'timeout' => 15,
-            'retry' => 15,
-            'status' => true,
-            'fcallback' => null,
-            'authname' => 'Your ocs auth name',
-            'authpass' => 'Your ocs auth pass',
+            'weight' => 100,
+           
         ],
     ],
+    // 如果免密码登录，则删除以下两行
+    'authname' => 'Your ocs auth name',
+    'authpass' => 'Your ocs auth pass',
 ],
 ```
 

@@ -10,7 +10,7 @@ class AliyunOcsServiceProvider extends ServiceProvider {
         Cache::extend('ocs', function($app, $config)
         {
             $memcached = $app['memcached.connector']->connect($config['servers']);
-            if(ini_get('memcached.use_sasl')) {
+            if(isset($config['servers']['authname']) && ini_get('memcached.use_sasl')) {
                 $user = $config['servers']['authname'];
                 $pass = $config['servers']['authpass'];
 
@@ -18,6 +18,7 @@ class AliyunOcsServiceProvider extends ServiceProvider {
                 $memcached->setOption(Memcached::OPT_BINARY_PROTOCOL, true);
                 $memcached->setSaslAuthData($user, $pass);
             }
+
             $prefix = $app['config']['cache.prefix'];
             $store = new \Illuminate\Cache\MemcachedStore($memcached, $prefix);
             
