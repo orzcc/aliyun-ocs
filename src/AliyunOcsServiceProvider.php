@@ -10,12 +10,24 @@ class AliyunOcsServiceProvider extends ServiceProvider {
      *
      * @var bool
      */
-    protected $defer = true;
+    protected $defer = false;
     
-    public function boot() {}
-
-    public function register()
+    public function boot()
     {
-        $this->app->singleton('memcached.connector', 'Orzcc\AliyunOcs\MemcachedConnector');
+        Cache::extend('ocs', function($app, $config)
+        {
+            $this->app->singleton('memcached.connector', function()
+            {
+                return new MemcachedConnector;
+            });
+
+            $memcached = $app['memcached.connector']->connect($config['servers']);
+            $prefix = $app['config']['cache.prefix'];
+            $store = new \Illuminate\Cache\MemcachedStore($memcached, $prefix);
+            
+            return new \Illuminate\Cache\Repository($store);
+        });
     }
+
+    public function register() {}
 }
