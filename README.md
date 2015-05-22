@@ -34,12 +34,13 @@ add a stores config to the file, change your ocs config
             'host' => 'Your ocs host',
             'port' => 11211,	// ocs port
             'weight' => 100,
-           
+            
+            // 如果免密码登录，则删除以下两行
+            'authname' => 'Your ocs auth name',
+            'authpass' => 'Your ocs auth pass',
         ],
     ],
-    // 如果免密码登录，则删除以下两行
-    'authname' => 'Your ocs auth name',
-    'authpass' => 'Your ocs auth pass',
+    
 ],
 ```
 
